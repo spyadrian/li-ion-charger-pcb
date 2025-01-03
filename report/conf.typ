@@ -16,7 +16,7 @@
 
   // Default Fonts and Styles
   set text(font: "Times New Roman", size: 12pt, lang: "fr")
-  show raw: set text(font: "Courier New", size: 10pt, lang: "fr")
+  show raw: set text(font: "Courier New", size: 12pt, lang: "fr")
 
 
   // Document style
@@ -30,8 +30,8 @@
   // Paragraph style
   set par(
     justify: true,
-    leading: 1.5em,
-    spacing: 1.5em,
+    leading: 1.2em,
+    spacing: 1.2em,
     first-line-indent: 2em,
   )
 
@@ -61,13 +61,13 @@
 
   show heading.where(level: 2): it => {
     v(weak: true, 2em)
-    block(counter(heading).display(it.numbering) + h(2em) + it.body)
+    block(counter(heading).display(it.numbering) + h(1em) + it.body)
     v(1em)
   }
 
   show heading.where(level: 3): it => {
     v(weak: true, 2em)
-    block(h(1em) + counter(heading).display("1.1.a )").split(".").last() + h(4em) + it.body)
+    block(counter(heading).display("1.1.a )").split(".").last() + h(1em) + it.body)
     v(1em)
   }
 
@@ -148,7 +148,7 @@
     pagebreak(weak: true)
 
     v(weak: true, 2em)
-    if it.numbering != none {block[Chapitre #counter(heading).display("1. ") #it.body]}
+    if it.numbering != none {block[Chapitre #counter(heading).display("1. ")#h(0.5em)#it.body]}
     else {block[#it.body]}
     v(1.75em)
   }
