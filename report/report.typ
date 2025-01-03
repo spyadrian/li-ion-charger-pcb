@@ -18,65 +18,66 @@
 
 #show: apply_chapter_style
 
-= Titre du chapitre
 
-#lorem(10)
 
-#lorem(30)
+= Introduction
 
-== Titre de niveau 2
-#lorem(50)
+== Énoncé du problème
 
-#figure(
-  image("image/hepia_logo.png", width: 75%),
-  caption: "Hepia logo"
-)
+== Objectifs et périmètre
 
-=== Titre de niveau 3
-#lorem(50)
+== Vue d'ensemble des exigences
 
-=== Titre de niveau 3
-#lorem(50)
 
-#figure(
-  table(
-    columns: (1fr, 1fr, 1fr),
-    [hahaha], [hahaha], [hahaha],
-    [hahaha], [hahaha], [hahaha],
-    [hahaha], [hahaha], [hahaha],
-  ),
 
-  caption: "it's a table !",
-)
+= Composants Principaux
 
-== Titre de niveau 2
-#lorem(50)
+== Gestionnaire de tension
 
-=== Titre de niveau 3
-#lorem(50)
+== Détecteur de tension
 
-=== Titre de niveau 3
-#lorem(50)
+== Régulateur de tension Boost
 
-== Titre de niveau 2
-#lorem(50)
+== Régulateur de tension Buck
 
-=== Titre de niveau 3
-#lorem(50)
 
-=== Titre de niveau 3
-#lorem(50)
 
-= Titre du chapitre
-#lorem(50)
+= Processus de Conception
 
-== Titre de niveau 2
-#lorem(50)
+== Étapes initiales de conception
 
-= Titre du chapitre
+== Étapes de conception du PCB
 
-== Titre de niveau 2
-#lorem(50)
+== Activités post-conception
+
+
+
+= Détaille de la Solutions
+
+== Architecture
+
+== Schémas
+
+== Routage du PCB
+
+
+
+= Résultats et Discussion
+
+== Résultats des tests
+
+== Problèmes rencontrés
+
+== Solutions apportées
+
+
 
 = Conclusion
-#lorem(50)
+
+== Résumé du projet
+
+== Enseignements tirés
+
+== Améliorations futures
+
+
