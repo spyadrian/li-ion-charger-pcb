@@ -12,7 +12,7 @@
 
 #outline(title: "Table des matières")
 
-#outline(title: "Liste des illustration", target: figure.where(kind: image))
+#outline(title: "Liste des figures", target: figure.where(kind: image))
 
 #outline(title: "Liste des tableaux", target: figure.where(kind: table))
 
