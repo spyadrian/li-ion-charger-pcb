@@ -6,9 +6,7 @@
   authors: (),
   orientation: none,
   teachers: none,
-  client: none,
   illustration: none,
-  source_illustration: [],
   date: datetime.today(),
 
   doc,
@@ -25,7 +23,7 @@
   set page(
     margin: 2.5cm,
     header: text(size: 8pt, fill: color.gray,
-      authors + " – " + title + " – " + "Projet de semestre – " + date.display("[month repr:long], [year]"))
+      authors + " – " + title + " – " + date.display("[month repr:long], [year]"))
   )
 
 
@@ -101,8 +99,8 @@
     grid(
       columns: (1fr, 1fr),
       align: (left, right),
-      {image("figure/hepia_logo.png", width: 60%)},
-      {image("figure/hes-so_logo.png", width: 60%)}
+      {image("image/hepia_logo.png", width: 60%)},
+      {image("image/hes-so_logo.png", width: 60%)}
     )
 
     // title
@@ -119,7 +117,7 @@
     }
 
     // authors, orientation & date
-    text(size: 14pt, "Projet de semestre présenté par")
+    text(size: 14pt, "Projet de conception de systèmes hardware présenté par")
     v(1em)
     text(size: 16pt, weight: "bold", authors)
     v(2em)
@@ -129,33 +127,7 @@
     v(2em)
 
     // teachers and client
-    if client == none {
-
-      text("Professeur-e HES responsable \n" + teachers)
-    } else {
-
-      grid(
-        columns: (1fr, 1fr),
-        {
-          text(size: 12pt, "Professeur-e HES responsable")
-          v(0.5em)
-          text(size: 12pt, weight: "bold", teachers)
-        },
-        {
-          text(size: 12pt, "Mandant")
-          v(0.5em)
-          text(size: 12pt, weight: "bold", client)
-        }
-
-      )
-    }
-
-    pagebreak()
-
-    set align(left)
-    v(1fr)
-    text("Caption and source of cover illustration :\n")
-    text(style: "italic", source_illustration)
+    text("Professeur-e HES responsable \n" + teachers)
   }
 
   // --- DOCUMENT ---
@@ -181,55 +153,9 @@
     v(1.75em)
   }
 
-  pagebreak()
-  pagebreak()
   counter(page).update(1)
+  pagebreak()
 
   doc
-}
-
-#let apply_annexe_style(doc) = {
-  show heading.where(level: 1): it => {
-    pagebreak(weak: true)
-
-    v(weak: true, 2em)
-    block[#it.body]
-    v(1.75em)
-  }
-
-  doc
-}
-
-#let add_brief(
-  img: none,
-  content: [],
-  applicant: [],
-  teacher: [],
-  entreprise: [],
-  internship_agreement: bool,
-  confidentiality_agreement: bool,
-
-) = {
-  set par(leading: 0.5em)
-
-  content
-
-  align(center, img)
-
-  table(
-    columns: (2fr, 3fr),
-    align: (left, left),
-    stroke: none,
-    gutter: 0.5em,
-
-    let str_inter_agr = if internship_agreement == true [oui] else [non],
-    let str_conf_agr = if confidentiality_agreement == true [oui] else [non],
-
-    [Candidat-e :], [Professeur-e(s) responsable(s) :],
-    [#text(weight: "bold", applicant)], [#text(weight: "bold", teacher)],
-    [Filière d'études : ISC], [En collaboration avec : #entreprise],
-    [], [Travail soumis à une convention de stage en entreprise : #str_inter_agr],
-    [], [Travail soumis à un contrat de confidentialité : #str_conf_agr],
-  )
 }
 
