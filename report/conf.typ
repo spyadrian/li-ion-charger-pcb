@@ -56,19 +56,19 @@
 
     v(weak: true, 2em)
     block[#it.body]
-    v(1.75em)
+    v(weak: true, 3em)
   }
 
   show heading.where(level: 2): it => {
     v(weak: true, 2em)
     block(counter(heading).display(it.numbering) + h(1em) + it.body)
-    v(1em)
+    v(weak: true, 2em)
   }
 
   show heading.where(level: 3): it => {
     v(weak: true, 2em)
     block(counter(heading).display("1.1.a )").split(".").last() + h(1em) + it.body)
-    v(1em)
+    v(weak: true, 1.5em)
   }
 
 
@@ -81,7 +81,7 @@
   set figure(gap: 1.5em)
   show figure.caption: emph
   show figure: it => {
-    v(1em)
+    v(weak: true, 1em)
     it.body
     it.caption
   }
