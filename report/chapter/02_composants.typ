@@ -24,7 +24,7 @@ Lorsqu'elle est en-dessous de $66.5$ % de la tension maximale, donc $~2.8$V, il 
 
 // TODO: j'ai commandé le mauvais mdr ? (2ADCI)
 
-=== Principals characteristiques
+=== Caractéristiques principales
 
 #figure(
   table(
@@ -43,41 +43,46 @@ Lorsqu'elle est en-dessous de $66.5$ % de la tension maximale, donc $~2.8$V, il 
 
 // TODO: mettre ici les calculs pour la resistance REG et pour la valeur de la charge maximale programmée ?
 
-== Détecteur de tension
+
+== Détecteur de tension - `BD52E30G-M`
 
 Le composant #link("https://www.mouser.ch/ProductDetail/ROHM-Semiconductor/BD53E30G-MTR?qs=WHeKGGBt0W8BsyUIHW4eRw%3D%3D")[`BD52E30G-M`] est un détecteur de tension (ou _voltage detector_).
 Ce type de circuit intégré est conçu pour surveiller une tension d'entrée (par exemple, celle d'une batterie ou d'une alimentation) et générer un signal lorsqu'une certaine condition de tension est atteinte.
 
 #figure(
-  image("../image/voltage-detector.jpg", width: 30%),
+  image("../image/voltage-detector.jpg", width: 35%),
 
   caption: "Photo du détecteur de tension",
 )
 
 === Justification
 
-// TODO:
+Dans notre cas, nous ne voulons pas que la batterie soit utilisé lorsqu'elle n'est pas chargé au-delà de $3$V.
+Pour cela, nous utilisons la condition du `BD52E30G-M` défini à $3$V pour activé et désactivé les régulateurs de tension utilisé avant les sorties.
+// TODO: je crois que c'est faux, demander !
+De sorte, le circuit utilisant la batterie ne pourra pas l'utilisé lorsque celle-ci se trouve en dessous de $3$V.
+La tension d'entrée du détecteur de tension est évidement la sortie de la batterie.
 
-=== Principal characteristique
+=== Caractéristiques principales
 
 #figure(
   table(
-    columns: (1fr, 1fr),
+    columns: (3fr, 2fr),
     align: (left, right),
 
-    [Threshold Voltage], [3V],
-    [Output Type], [CMOS],
-    [Supply Voltage - Max], [10V],
-    [Output Current], [80mA],
-    ["Low" Output Voltage - Max], [0.5V],
-    ["High" Output Voltage - Min], [2.5V],
+    [Tension de seuil], [$3$V],
+    [Type de sortie], [CMOS],
+    [Tension d'alimentation - Max], [$10$V],
+    [Courant de sortie], [$80$mA],
+    [Tension de sortie "bas" - Max], [$0.5$V],
+    [Tension de sortie "haut" - Min], [$2.5$V],
   ),
 
   caption: "Caractéristiques principales du détecteur de tension",
 )
 
 
-== Régulateur de tension Boost
+== Régulateur de tension Boost - `ISL97519A`
 
 Le #link("https://www.mouser.ch/ProductDetail/Renesas-Intersil/ISL97519AIUZ?qs=sGAEpiMZZMvAX9OfPh%252B2NdrUzpYIC9WFoHZg1f2cJ9g%3D")[`ISL97519A`] est un régulateur de tension élévateur (ou _boost regulator_).
 C'est un type de convertisseur conçu pour augmenter une tension d'entrée plus basse à une tension de sortie plus élevée tout en maintenant une alimentation stable et efficace pour les circuits électroniques.
@@ -90,25 +95,31 @@ C'est un type de convertisseur conçu pour augmenter une tension d'entrée plus 
 
 === Justification
 
-// TODO:
+Notre circuit électronique demande d'avoir deux sortie, dont une à $5$V.
+Puisque notre batterie doit garder une tension entre $2.9$V et $4.2$V, il est difficile de prendre dirctement une sortie $5$V.
+Nous avons alors utilisé le un régulateur de tension élévateur afin d'ajuster la tension fluctuante de la batterie à $5$V.
 
-=== Principal characteristique
+Le `ISL97519A` convient parfaitement à nos exigences, car il a une tension de sortie programable entre $5$V et $25$V, qu'il est fonctionnel avec une tension d'entrée entre $2.3$V et $5.5$V et qu'il dispose d'une pin afin de l'activé ou de le désactivé.
+Son courant de sortie à $1$A est essentiel afin de pouvoir utilisé les deux sortie du circuit à $500$mA.
+
+=== Caractéristiques principales
 
 #figure(
   table(
-    columns: (1fr, 1fr),
+    columns: (3fr, 2fr),
     align: (left, right),
 
-    [Output Voltage], [5V to 25V],
-    [Output Current], [1A],
-    [Input Voltage - Max], [2.3V],
-    [Input Voltage - Min], [5.5V],
+    [Tension de sortie], [$5$V à $25$V],
+    [Courant de sortie], [$1$A],
+    [Tension d'entrée - Max], [$2.3$V],
+    [Tension d'entrée - Min], [$5.5$V],
   ),
 
   caption: "Caractéristiques principales du régulateur de tension boost",
 )
 
-== Régulateur de tension buck
+
+== Régulateur de tension buck - `LM22671MRX-ADJ/NOPB`
 
 Le composant #link("https://www.mouser.ch/ProductDetail/Texas-Instruments/LM22671MRX-ADJ-NOPB?qs=X1J7HmVL2ZGHbJs9hwNu1Q%3D%3D")[`LM22671MRX-ADJ/NOPB`] est un régulateur de tension abaisseur (ou _buck regulator_).
 Il est conçu pour convertir une tension d'entrée plus élevée en une tension de sortie plus basse avec une efficacité élevée.
@@ -122,19 +133,24 @@ Ce type de régulateur est souvent utilisé pour alimenter des circuits sensible
 
 === Justification
 
-// TODO:
+De la même manière qu'avec le régulateur de tension élévateur, nous devions adapter la sortie fluctuante de la batterie à une sortie $3.3$V stable.
+Étant donnée que la batterie peut sortir une tension inférieur et supérieur à $3.3$V, nous avons préféré utilisé la sortie du régulateur de tension élévateur afin d'avoir uniquement à abaisser le tension.
 
-=== Principal characteristique
+Le `LM22671MRX-ADJ/NOPB` comporte les caractéristiques adéquate à notre problème, car il est capable d'abaisser une tension d'entrée jusqu'à $1.29$V.
+De plus, il sort un courant à $500$mA comme le demande l'énoncé.
+Il est fonctionnel entre $4.5$V et $42$V, ce qui harmonise avec notre sortie de $5$V.
+
+=== Caractéristiques principales
 
 #figure(
   table(
-    columns: (1fr, 1fr),
+    columns: (3fr, 2fr),
     align: (left, right),
 
-    [Output Voltage], [ADJ (3.3V)],
-    [Output Current], [500mA],
-    [Input Voltage - Max], [4.5V],
-    [Input Voltage - Min], [42V],
+    [Tension de sortie], [$>1.29$V],
+    [Courant de sortie], [$500$mA],
+    [Tension d'entrée - Min], [$4.5$V],
+    [Tension d'entrée - Max], [$42$V],
   ),
 
   caption: "Caractéristiques principales du régulateur de tension buck",
