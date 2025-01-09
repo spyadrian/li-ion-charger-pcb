@@ -1,15 +1,15 @@
-= Composants Principaux
+= Composants Principaux <chap_composants_principaux>
 
 
-== Gestionnaire de tension - `MCP73831T-2ACI/OT` // and not ...-2ADCI... !!!
+== Gestionnaire de batterie - `MCP73831T-2ACI/OT` // and not ...-2ADCI... !!!
 
-Le composant #link("https://www.mouser.ch/ProductDetail/Microchip-Technology/MCP73831T-2ACI-OT?qs=yUQqVecv4qvbBQBGbHx0Mw%3D%3D")[`MCP73831T-2ACI/OT`] est un gestionnaire de charge (ou _battery management_) dédié aux batteries lithium-ion et lithium-polymère.
+Le composant #link("https://www.mouser.ch/ProductDetail/Microchip-Technology/MCP73831T-2ACI-OT?qs=yUQqVecv4qvbBQBGbHx0Mw%3D%3D")[`MCP73831T-2ACI/OT`] est un gestionnaire de batterie (ou _battery management_) dédié aux batteries lithium-ion et lithium-polymère.
 Il est conçu pour charger une seule cellule et, entre-autre, reguler la tension de sortie.
 
 #figure(
   image("../image/battery-management.png", width: 25%),
 
-  caption: "Photo du gestionnaire de tension",
+  caption: "Photo du gestionnaire de batterie",
 )
 
 === Justification
@@ -31,14 +31,14 @@ Lorsqu'elle est en-dessous de $66.5$ % de la tension maximale, donc $~2.8$V, il 
     columns: (3fr, 2fr),
     align: (left, right),
 
-    [Tension de sortie], [$4.2$V],
-    [Courant de sortie], [$15$mA à $500$mA],
+    [Tension de sortie],                        [$4.2$V],
+    [Courant de sortie],                        [$15$mA à $500$mA],
     [Tension d'alimentation en fonctionnement], [$3.75$V à $6$V],
-    [Seuil de tension de préconditionnement], [$66.5$ %],
-    [Courant de préconditionnement], [$10$ %],
+    [Seuil de tension de préconditionnement],   [$66.5$ %],
+    [Courant de préconditionnement],            [$10$ %],
   ),
 
-  caption: "Caractéristiques principales du gestionnaire de tension",
+  caption: "Caractéristiques principales du gestionnaire de batterie",
 )
 
 // TODO: mettre ici les calculs pour la resistance REG et pour la valeur de la charge maximale programmée ?
@@ -70,11 +70,11 @@ La tension d'entrée du détecteur de tension est évidement la sortie de la bat
     columns: (3fr, 2fr),
     align: (left, right),
 
-    [Tension de seuil], [$3$V],
-    [Type de sortie], [CMOS],
-    [Tension d'alimentation - Max], [$10$V],
-    [Courant de sortie], [$80$mA],
-    [Tension de sortie "bas" - Max], [$0.5$V],
+    [Tension de seuil],               [$3$V],
+    [Type de sortie],                 [CMOS],
+    [Tension d'alimentation - Max],   [$10$V],
+    [Courant de sortie],              [$80$mA],
+    [Tension de sortie "bas" - Max],  [$0.5$V],
     [Tension de sortie "haut" - Min], [$2.5$V],
   ),
 
@@ -82,7 +82,7 @@ La tension d'entrée du détecteur de tension est évidement la sortie de la bat
 )
 
 
-== Régulateur de tension Boost - `ISL97519A`
+== Régulateur de tension boost - `ISL97519A`
 
 Le #link("https://www.mouser.ch/ProductDetail/Renesas-Intersil/ISL97519AIUZ?qs=sGAEpiMZZMvAX9OfPh%252B2NdrUzpYIC9WFoHZg1f2cJ9g%3D")[`ISL97519A`] est un régulateur de tension élévateur (ou _boost regulator_).
 C'est un type de convertisseur conçu pour augmenter une tension d'entrée plus basse à une tension de sortie plus élevée tout en maintenant une alimentation stable et efficace pour les circuits électroniques.
@@ -109,8 +109,8 @@ Son courant de sortie à $1$A est essentiel afin de pouvoir utilisé les deux so
     columns: (3fr, 2fr),
     align: (left, right),
 
-    [Tension de sortie], [$5$V à $25$V],
-    [Courant de sortie], [$1$A],
+    [Tension de sortie],      [$5$V à $25$V],
+    [Courant de sortie],      [$1$A],
     [Tension d'entrée - Max], [$2.3$V],
     [Tension d'entrée - Min], [$5.5$V],
   ),
@@ -147,8 +147,8 @@ Il est fonctionnel entre $4.5$V et $42$V, ce qui harmonise avec notre sortie de 
     columns: (3fr, 2fr),
     align: (left, right),
 
-    [Tension de sortie], [$>1.29$V],
-    [Courant de sortie], [$500$mA],
+    [Tension de sortie],      [$>1.29$V],
+    [Courant de sortie],      [$500$mA],
     [Tension d'entrée - Min], [$4.5$V],
     [Tension d'entrée - Max], [$42$V],
   ),
