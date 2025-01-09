@@ -87,6 +87,10 @@
   }
 
 
+  // Math style
+  set math.equation(numbering: "(1)", supplement: [Eq.])
+
+
   // --- COVER PAGE ---
 
   {
