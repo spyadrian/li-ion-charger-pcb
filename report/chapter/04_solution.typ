@@ -4,10 +4,10 @@
 == Architecture générale
 
 Notre chargeur de batterie a une architecture simple.
-Il s'agit d'aligner correctement les quatres composants décrits dans le @chap_composants_principaux en ajoutant les entrée et sortie nécéssaire.
-Chaque de ces composants ont besoins d'autres composants externe pour bien fonctionner.
-En dehors des entrées et des sorties, nous avons alors choisi de séparer le circuit en quatres sous-circuits, celui du gestionnaire de charge, du détecteur de tension, du régulateur de tension élévateur et abaisseur.
-Chaque sous-circuits est décrit précisément dans les sections dessous.
+Il s'agit d'aligner correctement les quatre composants décrits dans le @chap_composants_principaux en ajoutant les entrées et sorties nécessaires.
+Chaque de ces composants a besoin d'autres composants externes pour bien fonctionner.
+En dehors des entrées et des sorties, nous avons alors choisi de séparer le circuit en quatre sous-circuits, celui du gestionnaire de charge, du détecteur de tension, du régulateur de tension élévateur et abaisseur.
+Chaque sous-circuits est décrit précisément dans les sections ci-dessous.
 Le schéma ci-dessous montre l'architecture générale du projet.
 
 #figure(
@@ -19,10 +19,10 @@ Le schéma ci-dessous montre l'architecture générale du projet.
 
 == Gestionnaire de batterie
 
-Le gestionnaire de tâche n'est pas un composant compliqué.
-Il est nécéssaire d'ajouter qu'une résistance afin de le voir fonctionner correctement.
+Le gestionnaire de batterie n'est pas un composant compliqué.
+Il n'est nécessaire d'ajouter qu'une résistance afin de le voir fonctionner correctement.
 Celle-ci se trouve entre les pins PROG et VSS.
-Le @tab_bat_desc_pins décrit l'utilité de chaque pins.
+Le @tab_bat_desc_pins décrit l'utilité de chaque pin.
 
 #figure(
   table(
@@ -34,16 +34,16 @@ Le @tab_bat_desc_pins décrit l'utilité de chaque pins.
 
     [1], [STAT],      [Status de la charge],
     [2], [$V_"SS"$],  [Référence de gestion de batterie ($0$V)],
-    [3], [$V_"BAT"$], [Sortie pour la charge la batterie],
+    [3], [$V_"BAT"$], [Sortie pour la charge de la batterie],
     [4], [$V_"DD"$],  [Entrée de l'alimentation],
-    [5], [PROG],      [Le courant maximum est programé avec une résistance de PROG à $V_"SS"$],
+    [5], [PROG],      [Le courant maximum est programmé avec une résistance de PROG à $V_"SS"$],
   ),
 
   caption: "Description des pins du gestionnaire de batterie",
 ) <tab_bat_desc_pins>
 
-Tandis que $V_"DD"$ et $V_"BAT"$ sont respictivement l'entrée et la sortie du gestionnaire de batterie, la pin PROG sert configurer le courant maximum.
-La pin STAT, elle, est utilisé afin de donner un retour utilisateur sur l'état de la batterie.
+Tandis que $V_"DD"$ et $V_"BAT"$ sont respectivement l'entrée et la sortie du gestionnaire de batterie, la pin PROG sert à configurer le courant maximum.
+La pin STAT, lui, est utilisé afin de donner un retour utilisateur sur l'état de la batterie.
 
 #figure(
   image("../image/battery-management_schema.png", width: 100%),
@@ -51,8 +51,8 @@ La pin STAT, elle, est utilisé afin de donner un retour utilisateur sur l'état
   caption: "Schéma électronique du gestionnaire de batterie",
 )
 
-Afin de configurer la sortie du gestionnaire de batterie à $500$mA, nous avons placé une résistance entre la pin PROG et VSS comme indiqué dans la _datasheet_.
-La valeur de cette résistance est donner à l'aide de l'@eq_bat_res.
+Dans le but de configurer la sortie du gestionnaire de batterie à $500$mA, nous avons placé une résistance entre la pin PROG et VSS comme indiqué dans la _datasheet_.
+La valeur de cette résistance est donnée à l'aide de l'@eq_bat_res.
 
 $
   &I_"REG" = (1000"V")/R_"PROG" \
@@ -61,22 +61,22 @@ $ <eq_bat_res>
 
 Étant donnée les $500$mA souhaiter en sortie, la valeur de la résistance est de $2$k$ohm$.
 
-La pin STAT est relié à une led ainsi qu'une résistance afin d'indiquer l'état de la charge.
-Connaissant le courant que l'on veut faire passer dans la led, il suffit d'utilisé la loi d'Ohm pour trouver la valeur de la résistance.
+La pin STAT est relié à une led ainsi qu'à une résistance afin d'indiquer l'état de la charge.
+Connaissant le courant que l'on veut faire passer dans la led, il suffit d'utiliser la loi d'Ohm pour trouver la valeur de la résistance.
 
 $ U = R times I arrow.l.r.double R = U / I $
 
-Afin de faire illuminé la led à $75%$ de ca capacité, nous devons faire passer $10$mA à travers.
-Cela revient a avoir une résistance de $500ohm$.
+Pour faire illuminer la led à $75%$ de ça capacité, nous devons faire passer $10$mA à travers.
+Cela revient à avoir une résistance de $500ohm$.
 Le plus proche avec la norme _E24_ étant $470ohm$.
 
-Les condensateurs qui reste sont principalement là pour atténuer le bruit et lisser les signaux d'entrées et de sorties.
+Les condensateurs qui restent sont principalement là pour atténuer le bruit et lisser les signaux d'entrées et de sorties.
 En ce qui concerne leurs valeurs, nous avons repris celle donnée dans la _datasheet_.
 
 
 == Détecteur de tension
 
-Le schéma du détecteur de tension est très simple dans mon cas, car l'intégralité du travail, pour détecter une tension, est fait à l'intérieur du `BD53E30G-MTR`.
+Le schéma du détecteur de tension est très simple dans mon cas, car l'intégralité du travail, pour détecter une tension, est faite à l'intérieur du `BD53E30G-MTR`.
 
 #figure(
   table(
@@ -96,11 +96,12 @@ Le schéma du détecteur de tension est très simple dans mon cas, car l'intégr
   caption: "Description des pins du détecteur de tension",
 )
 
-Les deux pins les plus importantes de ce composants, sont les pins $V_"DD"$ et $V_"out"$.
+Les deux pins les plus importantes de ce composant sont les pins $V_"DD"$ et $V_"out"$.
 $V_"DD"$ est l'entrée sur laquelle va se baser la détection et $V_"out"$ serra le signal de sortie.
 
-La tension à surveiller dans notre projet est celle situé sur le segment $V_"bat"$ qui est lié à la sortie de notre batterie lithium-polymère et à celle de notre gestionnaire de batterie.
-Notre signal de sortie serra utilisé pour activé ou désactivé les régulateurs de tension, il est alors connectée au segment _EN_ (_enable_).
+La tension à surveiller dans notre projet est celle située sur le segment $V_"bat"$ qui est lié à la sortie de notre batterie lithium-polymère et à celle de notre gestionnaire de batterie.
+Notre signal de sortie sera utilisé pour activer ou désactiver les régulateurs de tension.
+Il est alors connecté au segment _EN_ (_enable_).
 
 #figure(
   image("../image/voltage-detector_schema.png", width: 50%),
@@ -109,21 +110,21 @@ Notre signal de sortie serra utilisé pour activé ou désactivé les régulateu
 )
 
 Dans notre schéma, il aurait été possible de rajouter deux condensateurs.
-L'un connecté à la pin $C_"T"$ afin d'ajouter un délai à la sortie, et l'autre, $C_"L"$ connecté à la sortie afin de filtrer le bruit.
+L'un connecté à la pin $C_"T"$ afin d'ajouter un délai à la sortie, et l'autre, $C_"L"$ connecté à la sortie pour filtrer le bruit.
 Dans le cadre de notre projet, nous avons jugé que ces deux condensateurs n'étaient pas nécéssaire.
-Il est bien de noter que mettre un condensateur $0$F à la sortie $C_"T"$ revient à la laisser flottante.
+Il est bon de noter que mettre un condensateur $0$F à la sortie $C_"T"$ revient à la laisser flottante.
 
 
 == Régulateur de tension boost
 
 Le régulateur de tension élévateur est l'élément de contrôle central de son circuit.
-Il gère les signaux de commutation, la comparaison des tensions, et les mécanismes de contrôle nécessaires pour réguler la tension.
-Il ajoute aussi des fonctionnalités de protection, comme le _overvoltage protection_, le _overcurrent protection_ ou le _soft start_.
+Il gère les signaux de commutation, la comparaison des tensions et les mécanismes de contrôle nécessaires pour réguler la tension.
+Il ajoute aussi des fonctionnalités de protection, comme l'_overvoltage protection_, l'_overcurrent protection_ ou le _soft start_.
 
 En revanche, il n'est pas capable de stocker de l'énergie ou bien même de filtrer du bruit.
-C'est pour cela que, de plus des résistances pour configurer la tension voulu, il faut ajouter une serie de composants autour du régulateur afin de le faire fonctionner.
+C'est pour cela que, en plus des résistances pour configurer la tension voulue, il faut ajouter une série de composants autour du régulateur afin de le faire fonctionner.
 
-Voici un tableau résumant les functions des pins du `ISL97519AIUZ` :
+Voici un tableau résumant les fonctions des pins du `ISL97519AIUZ` :
 
 #figure(
   table(
@@ -148,13 +149,13 @@ Voici un tableau résumant les functions des pins du `ISL97519AIUZ` :
 
 Les pins nécessitant une attention particulière sont clairement FB et LX.
 La pin de _Feedback_ (FB) surveille la tension de sortie.
-La tension à cette pin serra comparé a une référence de tension à l'intérieur du composant.
-Une comparaison qui va permettre de dire au régulateur d'augmenter ou diminuer la tension.
-C'est pour cela que cette pin est connectée à un diviseur de tension qui determinera la tension de sortie du régulateur.
+La tension à cette pin serra comparée à une référence de tension à l'intérieur du composant.
+Une comparaison qui va permettre de dire au régulateur d'augmenter ou de diminuer la tension.
+C'est pour cela que cette pin est connectée à un diviseur de tension qui déterminera la tension de sortie du régulateur.
 
-La _switching pin_ (LX) va alterner entre une haute en basse tension.
+La _switching pin_ (LX) va alterner entre une haute et une basse tension.
 Connectée à une inductance, celle-ci pourra stocker de l'énergie (à l'état haut) et la libérer (à l'état bas).
-C'est le coeur du processus d'élévation de la tension.
+C'est le cœur du processus d'élévation de la tension.
 
 #figure(
   image("../image/boost-regulator_schema.png", width: 100%),
@@ -162,50 +163,50 @@ C'est le coeur du processus d'élévation de la tension.
   caption: "Schéma électronique du régulateur de tension boost",
 )
 
-Comme anoncé précédement, le schéma montre que la pin FB est connectée à un diviseur de tension.
-Les valeurs pour ce diviseur de tension sont donnée via @eq_boost_out.
+Comme annoncé précédemment, le schéma montre que la pin FB est connectée à un diviseur de tension.
+Les valeurs pour ce diviseur de tension sont données via @eq_boost_out.
 
 $ V_"OUT" = V_"FB" times (1 + R_3 / R_4) $ <eq_boost_out>
 
-Il existe plusieurs valeurs possible pour résoudre cette équation.
+Il existe plusieurs valeurs possibles pour résoudre cette équation.
 La _datasheet_ conseillant un réseau de résistances inférieur à $100$k$ohm$ et voulant rester dans les normes _E24_, nous avons choisi $82$k$ohm$ pour $R_3$ et $27$k$ohm$ pour $R_4$.
-La valeur final de $V_"OUT"$ étant de $5.006$V qui aproxime bien nos $5$V voulu.
+La valeur final de $V_"OUT"$ étant de $5.006$V qui approxime bien nos $5$V voulu.
 
-Une inductance est nécéssaire afin de stocker de l'énergie et la relacher.
-Son choix dépends de la plage de tension d'entrée, de la tension de sortie, du courant de charge et de la fréquence de commutation.
+Une inductance est nécessaire afin de stocker de l'énergie et de la relâcher.
+Son choix dépend de la plage de tension d'entrée, de la tension de sortie, du courant de charge et de la fréquence de commutation.
 La _datasheet_ propose une inductance entre $2mu$H et $33mu$H pour la majorité des applications.
-Une des application donnée en example utilise une valeur de $10mu$H, c'est la valeur que nous avons décidé de prendre.
-Afin de ne pas saturer l'inductance, il est nécéssaire que son courant maximum soit supérieur à celui demandé par le régulateur.
-Celui-ci est donnée via @eq_boost_Lpeak.
+Une des applications données, en exemple, utilise une valeur de $10mu$H, c'est la valeur que nous avons décidé de prendre.
+Afin de ne pas saturer l'inductance, il est nécessaire que son courant maximum soit supérieur à celui demandé par le régulateur.
+Celui-ci est donné via @eq_boost_Lpeak.
 
 $ I_"L(PEAK)" = (I_"OUT" times V_"OUT") / V_"IN" + 1/2 times (V_"IN" times (V_"OUT" - V_"IN"))/(L times V_"OUT" times "FREQ") = 1.71"A" $ <eq_boost_Lpeak>
 
 L'inductance finale a $10mu$H et résiste à $2$A.
 
-La diode $D_1$ est positionné à cet endroit afin de ne pas laisser passer le courant lorsque la pin LX est à l'état bas.
-Il faut alors qu'elle puisse endosser plus que la tension de sortie ainsi qu'un courant plus élevé que celui pique de l'inductance.
+La diode $D_1$ est positionnée à cet endroit afin de ne pas laisser passer le courant lorsque la pin LX est à l'état bas.
+Il faut alors qu'elle puisse endosser plus que la tension de sortie ainsi qu'un courant plus élevé que celui du pic de l'inductance.
 D'où une diode de $15$V et $2$A.
 
-Par erreur, je n'ai pas mise la bonne diode dans le schéma ni dans la conception de mon circuit.
-Heureusement, ce n'est pas un problème car la diode $15$V $1$A que j'utilise à des valeurs maximum assez haute pour obtenir la marge voulu de $2$A.
+Par erreur, nous n'avons pas mis la bonne diode dans le schéma ni dans la conception de mon circuit.
+Heureusement, ce n'est pas un problème, car la diode $15$V $1$A que nous utilisons a des valeurs maximum assez hautes pour obtenir la marge voulue de $2$A.
 
-Les condensateurs présent dans le circuit servent principalement à lisser les sorties/entrées et à atténuer le bruit.
-Pour leurs valeurs, nous avons décidé de gardé les valeurs données dans la _datasheet_.
+Les condensateurs présents dans le circuit servent principalement à lisser les sorties/entrées et à atténuer le bruit.
+Pour leurs valeurs, nous avons décidé de garder les valeurs données dans la _datasheet_.
 
 Une erreur qui nous a couté beaucoup de temps de travail est le fait que nous avons mis la pin SS au _ground_.
-En effet, pour ne pas avoir de _soft start_ nous avons voulu le désactivé, mais au lieu de le désactivé en mettant ça pin dans l'état flottante, nous l'avons mis au _ground_ et avons donc désactivé le régulateur de tension élévateur.
-Pour palier cela, nous somme venu enlever la soudure de la pin et la relevé pour qu'elle soit à l'état flottant.
+En effet, pour ne pas avoir de _soft start_ nous avons voulu le désactiver, mais au lieu de le désactiver en mettant sa pin dans l'état flottante, nous l'avons mis au _ground_ et avons donc désactivé le régulateur de tension élévateur.
+Pour pallier cela, nous sommes venus enlever la soudure de la pin et la relevé pour qu'elle soit à l'état flottant.
 
 
-== Régulateur de tension buck
+== Régulateur de tension élévateur
 
-De la même façon que le régulateur de tension élévateur, le régulateur de tension abaisseur n'est pas capable de tous faire tous seul.
-Il se focalise uniquement sur quelques tâches, comme entre-autre, la comparaison des tensions et les signaux de commutation.
+De la même façon que le régulateur de tension élévateur, le régulateur de tension abaisseur n'est pas capable de tout faire tout seul.
+Il se focalise uniquement sur quelques tâches, comme, entre autres, la comparaison des tensions et les signaux de commutation.
 
-Le régulateur de tension abaisseur ne fait donc pas les choses seuls, il utilise plusieurs composants externe afin de fonctionner correctement.
-Ils sont nécéssaire pour configurer la tension de sortie, ou bien stocker de l'énergie.
+Le régulateur de tension abaisseur ne fait donc pas les choses seul, il utilise plusieurs composants externes afin de fonctionner correctement.
+Ils sont nécessaires pour configurer la tension de sortie ou bien stocker de l'énergie.
 
-Le @tab_desc_pins_buck decrit les différents pins du `LM22671MRX-ADJ/NOPB`.
+Le @tab_desc_pins_buck décrit les différents pins du `LM22671MRX-ADJ/NOPB`.
 
 #figure(
   table(
@@ -228,7 +229,7 @@ Le @tab_desc_pins_buck decrit les différents pins du `LM22671MRX-ADJ/NOPB`.
   caption: "Description des pins du régulateur de tension buck",
 ) <tab_desc_pins_buck>
 
-Les pins FB, SW et BOOT sont les plus complexes mais aussi les plus utiles.
+Les pins FB, SW et BOOT sont les plus complexes, mais aussi les plus utiles.
 La pin de _Feedback_ (FB) a le même comportement que celle dans le régulateur de tension élévateur.
 Elle est connectée à un diviseur de tension qui donnera la tension de sortie.
 
@@ -236,12 +237,12 @@ La pin _Switch_ (SW) est similaire à la pin (LX) du régulateur de tension él�
 Elle permet de stocker de l'énergie dans une inductance en alternant entre l'état haut et l'état bas.
 C'est ce qui permet d'abaisser la tension de sortie.
 
-La pin _Bootstrap_ (BOOT) est utilisé afin d'activé et désactivé le MOSFET à l'intérieur du composant, comme illustré sur le schéma de la @img_buck_boot_pin.
+La pin _Bootstrap_ (BOOT) est utilisée afin d'activer et de désactiver le MOSFET à l'intérieur du composant, comme illustré sur le schéma de la @img_buck_boot_pin.
 
 #figure(
   image("../image/buck-regulator_boot_pin.png", width: 50%),
 
-  caption: "Schéma block de la pin boot du régulateur de tension abaisseur",
+  caption: "Schéma bloc de la pin BOOT du régulateur de tension abaisseur",
 ) <img_buck_boot_pin>
 
 En effet, pour faire passer du courant à travers un MOSFET, il faut une tension positive.
@@ -251,10 +252,10 @@ Pour pouvoir augmenter la tension, on utilise un condensateur qui va revenir dep
 #figure(
   image("../image/buck-regulator_schema.png", width: 100%),
 
-  caption: "Schéma électronique du régulateur de tension buck",
+  caption: "Schéma électronique du régulateur de tension abaisseur",
 )
 
-Le diviseur de tension connecté à la pin FB est calculé à l'aide de l'@eq_buck_out fournit dans la _datashet_.
+Le diviseur de tension connecté à la pin FB est calculé à l'aide de l'@eq_buck_out fourni dans la _datashet_.
 
 $
   &R_"FBT" = (V_"OUT"/1.285 - 1) times R_"FBB" \
@@ -262,21 +263,22 @@ $
 $ <eq_buck_out>
 
 Une valeur maximale de $10$k$ohm$ est recommandée pour la somme de $R_"FBB"$ et $R_"FBT"$ afin de maintenir une bonne précision de la tension de sortie.
-C'est pour cela, que nous avons choisi $2$k$ohm$ pour $R_"FBT"$ et $1.3$k$ohm$ pour $R_"FBB"$.
+C'est pour cela que nous avons choisi $2$k$ohm$ pour $R_"FBT"$ et $1.3$k$ohm$ pour $R_"FBB"$.
 
-Étant donnée que la _datasheet_ du `LM22671MRX-ADJ/NOPB` donne un example d'application pour un régulateur de tension ayant une sortie à $3.3$V, nous avons repris leurs valeur pour les condensateurs, l'inductance et la diode.
-A l'exception du $C_8$, les condensateurs servent à atténuer le buit et lisser les signaux d'entrée/sortie.
+Étant donné que la _datasheet_ du `LM22671MRX-ADJ/NOPB` donne un exemple d'application pour un régulateur de tension ayant une sortie à $3.3$V, nous avons repris les valeurs pour les condensateurs, l'inductance et la diode.
+À l'exception du $C_8$, les condensateurs servent à atténuer le bruit et à lisser les signaux d'entrée/sortie.
 
 N'ayant pas besoin de _soft start_, la pin SS est flottante.
-De la même manière, la pin RT/SYNC est flottante car la configuration de la fréquence de base convient.
+De la même manière, la pin RT/SYNC est flottante, car la configuration de la fréquence de base convient.
 
-Les valeurs entre parenthèse que l'on peut voir sur le schéma réfère à la diode que j'ai mis à cet emplacement lors de la conception de mon PCB, ceci est dû à une erreur de commande.
-Les valeurs étant juste plus grande, cela ne pose aucun problème.
+Les valeurs entre parenthèses que l'on peut voir sur le schéma référent à la diode que nous avons mise à cet emplacement lors de la conception de mon PCB. 
+Ceci est dû à une erreur de commande.
+Les valeurs étant juste plus grandes, cela ne pose aucun problème.
 
 
 == Routage du PCB
 
-Étant donnée le nombre de composants que nous avions, le routage du PCB c'est passé sans encombre.
+Étant donné le nombre de composants que nous avions, le routage du PCB s'est passé sans encombre.
 L'une des règles du pouce était d'avoir $1$mm de large pour une route pour $100$mA.
 Nous avons pu la respecter sans trop de problème.
 
@@ -291,3 +293,4 @@ Nous avons pu la respecter sans trop de problème.
 
   caption: "Dos de la schématique des routes sur Altium",
 )
+

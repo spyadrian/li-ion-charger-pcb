@@ -21,5 +21,5 @@ L’objectif principal de ce projet est de développer un circuit imprimé fonct
 + Utilisation exclusive de composants SMD, facilitant l’automatisation du montage.
 
 Le projet est limité à une phase de conception et de test d’un prototype.
-L’intégration dans un produit final ne font pas partie du projet.
+L’intégration dans un produit final ne fait pas partie du projet.
 
