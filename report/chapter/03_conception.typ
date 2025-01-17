@@ -19,8 +19,6 @@ Pour palier cela, nous avons dû créer nos propre composants sur Altium.
 Il s'agit, entre-autre, de créer un schéma pratique et lisible pour leurs utilisations future.
 En commençant par le taille de composants ainsi que les pins qui lui sont attribuées.
 
-// TODO: ajouter image d'example
-
 
 == Étapes de conception du PCB
 
