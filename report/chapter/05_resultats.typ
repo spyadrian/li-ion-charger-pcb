@@ -132,11 +132,12 @@ $ mu = P_"utile" / P_"fournie" times 100 $
 Dans notre cas, nous avons une éfficacité qui allentour les $75%$ pour la sortie $3.3$V comme pour la $5$V.
 
 
-== Problèmes rencontrés
+== Problèmes rencontrés et Solutions
 
-// ...
+L'un des plus gros problème que nous avons rencontré s'est passé lors de la mesure des composants.
+En effet, lors d'une mesure, nous avons, malenconstreusement, mis $7$V en entrée de la batterie.
+Les composants ont pour la majorité bien réagis, ormis le régulateur de tension élévateur qui a cessé de fonctionné directement après cela.
 
-
-== Solutions apportées
-
-// ...
+Heureusement, nous avions préparer un double de tous les composants, et avons pu le remplacer.
+Pour ce faire, nous avons déssouder le composant à l'aide d'une tresse à déssouder, pour ensuite souder au fer à souder le nouveau régulateur.
+Après cela, le chargeur de batterie était à nouveau fonctionnel.
