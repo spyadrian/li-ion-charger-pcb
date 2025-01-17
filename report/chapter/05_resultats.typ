@@ -91,7 +91,6 @@ Celà est certainement dû aux pertes internes du composant.
 
 Il est bien de noter que si l'on compare les deux graphiques vu, nous remaquons que la sortie $3.3$V s’active en même temps que la sortie $5$V, à l'exception du problème, souligner au-dessus, lorsque l'on tire $500$mA.
 
-// TODO: change mesure
 #figure(
   image("../image/graph_decharge_tension_5.png", width: 100%),
 
@@ -109,7 +108,7 @@ Ils permettent de comparé de manière visuel la consommation du circuit entre l
 
 Le graphique concernant la sortie $3.3$V montre que la consommation augmmente en fonction de la tension de la batterie, plus elle est baisse plus on consomme.
 Évidemment, quand la sortie est activé.
-Cette augmmentation est négligable lorsque l'on tire $100$mA mais drastique lorsqu'il s'agit de $500$mA, avec une différence de $250$mA entre une tension de $3.2$V et $4.2$V.
+Cette augmmentation est négligable lorsque l'on tire $100$mA mais drastique lorsqu'il s'agit de $500$mA, avec une différence de plus de $250$mA entre une tension de $3.2$V et $4.2$V.
 En effet, lorsque la tension de la batterie diminue, le régulateur doit fournir plus de courant pour maintenir une puissance de sortie constante, cela provoque une augmmentation des pertes.
 Son rendement diminue alors grandement.
 
