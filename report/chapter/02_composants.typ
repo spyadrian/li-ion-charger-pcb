@@ -14,15 +14,13 @@ Il est conçu pour charger une seule cellule et, entre-autre, reguler la tension
 
 === Justification
 
-Le gestionnaire de tension s'inscrit dans notre projet comme étant l'élément qui supervisera le chargement de la batterie.
+Le gestionnaire de batterie s'inscrit dans notre projet comme étant l'élément qui supervisera le chargement de la batterie.
 En effet, pour bien concerver une batterie lithium-polymère, il est nécessaire de ne pas charger la batterie au-delà de $4.2$V, en plus de ne pas la charger avec trop de charge lorsqu'elle est en-dessous de $2.9$V.
 Cela pourrait reduire la capacité de la batterie ainsi que sa durée de vie.
 
-Le gestionnaire de tension `MCP73831T-2ACI/OT` convient à nos car critères, car il fixe la tension maximale appliquée à la batterie à $4.2$V.
+Le gestionnaire de batterie `MCP73831T-2ACI/OT` convient à nos car critères, car il fixe la tension maximale appliquée à la batterie à $4.2$V.
 De plus, afin de ne pas brusquer la batterie, le `MCP73831T-2ACI/OT` défini plusieurs mode de charge pour la batterie.
 Lorsqu'elle est en-dessous de $66.5$ % de la tension maximale, donc $~2.8$V, il passera en _Trickle Charge Mode_ (en préconditionnement) qui consiste à chargé la batterie utilisant uniquement $10$ % du courant maximal spécifié.
-
-// TODO: j'ai commandé le mauvais mdr ? (2ADCI)
 
 === Caractéristiques principales
 
@@ -41,8 +39,6 @@ Lorsqu'elle est en-dessous de $66.5$ % de la tension maximale, donc $~2.8$V, il 
   caption: "Caractéristiques principales du gestionnaire de batterie",
 )
 
-// TODO: mettre ici les calculs pour la resistance REG et pour la valeur de la charge maximale programmée ?
-
 
 == Détecteur de tension - `BD52E30G-M`
 
@@ -59,7 +55,6 @@ Ce type de circuit intégré est conçu pour surveiller une tension d'entrée (p
 
 Dans notre cas, nous ne voulons pas que la batterie soit utilisé lorsqu'elle n'est pas chargé au-delà de $3$V.
 Pour cela, nous utilisons la condition du `BD52E30G-M` défini à $3$V pour activé et désactivé les régulateurs de tension utilisé avant les sorties.
-// TODO: je crois que c'est faux, demander !
 De sorte, le circuit utilisant la batterie ne pourra pas l'utilisé lorsque celle-ci se trouve en dessous de $3$V.
 La tension d'entrée du détecteur de tension est évidement la sortie de la batterie.
 
