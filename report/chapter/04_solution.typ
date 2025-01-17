@@ -10,9 +10,12 @@ En dehors des entrées et des sorties, nous avons alors choisi de séparer le ci
 Chaque sous-circuits est décrit précisément dans les sections dessous.
 Le schéma ci-dessous montre l'architecture générale du projet.
 
-// TODO: add image générale
+#figure(
+  image("../image/schema_general.png", width: 95%),
 
-// TODO: besoin de la détailler ?
+  caption: "Schéma général de l'architecture",
+)
+
 
 == Gestionnaire de batterie
 
@@ -43,7 +46,7 @@ Tandis que $V_"DD"$ et $V_"BAT"$ sont respictivement l'entrée et la sortie du g
 La pin STAT, elle, est utilisé afin de donner un retour utilisateur sur l'état de la batterie.
 
 #figure(
-  image("../image/battery-management_schema.png", width: 170%),
+  image("../image/battery-management_schema.png", width: 100%),
 
   caption: "Schéma électronique du gestionnaire de batterie",
 )
@@ -100,7 +103,7 @@ La tension à surveiller dans notre projet est celle situé sur le segment $V_"b
 Notre signal de sortie serra utilisé pour activé ou désactivé les régulateurs de tension, il est alors connectée au segment _EN_ (_enable_).
 
 #figure(
-  image("../image/voltage-detector_schema.png", width: 100%),
+  image("../image/voltage-detector_schema.png", width: 50%),
 
   caption: "Schéma électronique du détecteur de tension",
 )
@@ -154,7 +157,7 @@ Connectée à une inductance, celle-ci pourra stocker de l'énergie (à l'état 
 C'est le coeur du processus d'élévation de la tension.
 
 #figure(
-  image("../image/boost-regulator_schema.png", width: 110%),
+  image("../image/boost-regulator_schema.png", width: 100%),
 
   caption: "Schéma électronique du régulateur de tension boost",
 )
@@ -183,8 +186,8 @@ La diode $D_1$ est positionné à cet endroit afin de ne pas laisser passer le c
 Il faut alors qu'elle puisse endosser plus que la tension de sortie ainsi qu'un courant plus élevé que celui pique de l'inductance.
 D'où une diode de $15$V et $2$A.
 
-// TODO: probleme, g pa vu ca au debu, alors mauvaise valeur mais ca marche quand meme avec les valeurs max de la diode
-//       Comme vous avez pu voir, c'est pa 2 mè 1
+Par erreur, je n'ai pas mise la bonne diode dans le schéma ni dans la conception de mon circuit.
+Heureusement, ce n'est pas un problème car la diode $15$V $1$A que j'utilise à des valeurs maximum assez haute pour obtenir la marge voulu de $2$A.
 
 Les condensateurs présent dans le circuit servent principalement à lisser les sorties/entrées et à atténuer le bruit.
 Pour leurs valeurs, nous avons décidé de gardé les valeurs données dans la _datasheet_.
@@ -263,7 +266,8 @@ A l'exception du $C_8$, les condensateurs servent à atténuer le buit et lisser
 N'ayant pas besoin de _soft start_, la pin SS est flottante.
 De la même manière, la pin RT/SYNC est flottante car la configuration de la fréquence de base convient.
 
-// TODO: j'ai pas mis la bonne diode mais pas un soucis
+Les valeurs entre parenthèse que l'on peut voir sur le schéma réfère à la diode que j'ai mis à cet emplacement lors de la conception de mon PCB, ceci est dû à une erreur de commande.
+Les valeurs étant juste plus grande, cela ne pose aucun problème.
 
 
 == Routage du PCB
@@ -272,4 +276,14 @@ De la même manière, la pin RT/SYNC est flottante car la configuration de la fr
 L'une des règles du pouce était d'avoir $1$mm de large pour une route pour $100$mA.
 Nous avons pu la respecter sans trop de problème.
 
-// TODO: add schema rout PCB
+#figure(
+  image("../image/route_top.png", width: 60%),
+
+  caption: "Face de la schématique des routes sur Altium",
+)
+
+#figure(
+  image("../image/route_back.png", width: 60%),
+
+  caption: "Dos de la schématique des routes sur Altium",
+)
