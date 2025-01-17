@@ -1,7 +1,7 @@
 = Composants Principaux <chap_composants_principaux>
 
 
-== Gestionnaire de batterie - `MCP73831T-2ACI/OT` // and not ...-2ADCI... !!!
+== Gestionnaire de batterie - `MCP73831T-2ACI/OT` // and not ...-2DCI... !!!
 
 Le composant #link("https://www.mouser.ch/ProductDetail/Microchip-Technology/MCP73831T-2ACI-OT?qs=yUQqVecv4qvbBQBGbHx0Mw%3D%3D")[`MCP73831T-2ACI/OT`] est un gestionnaire de batterie (ou _battery management_) dédié aux batteries lithium-ion et lithium-polymère.
 Il est conçu pour charger une seule cellule et, entre-autre, reguler la tension de sortie.
