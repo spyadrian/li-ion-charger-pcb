@@ -192,6 +192,10 @@ Heureusement, ce n'est pas un problème car la diode $15$V $1$A que j'utilise à
 Les condensateurs présent dans le circuit servent principalement à lisser les sorties/entrées et à atténuer le bruit.
 Pour leurs valeurs, nous avons décidé de gardé les valeurs données dans la _datasheet_.
 
+Une erreur qui nous a couté beaucoup de temps de travail est le fait que nous avons mis la pin SS au _ground_.
+En effet, pour ne pas avoir de _soft start_ nous avons voulu le désactivé, mais au lieu de le désactivé en mettant ça pin dans l'état flottante, nous l'avons mis au _ground_ et avons donc désactivé le régulateur de tension élévateur.
+Pour palier cela, nous somme venu enlever la soudure de la pin et la relevé pour qu'elle soit à l'état flottant.
+
 
 == Régulateur de tension buck
 
