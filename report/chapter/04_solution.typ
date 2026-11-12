@@ -294,3 +294,8 @@ Nous avons pu la respecter sans trop de problème.
   caption: "Dos de la schématique des routes sur Altium",
 )
 
+#figure(
+  image("../image/photo_PCB.jpg", width: 100%),
+
+  caption: "Photo du PCB monté",
+)
