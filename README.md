@@ -1,4 +1,12 @@
-# Development of a Li-Ion - Li-Po charger
+# Development of a Li-Ion / Li-Po charger
+
+hepia, Hardware Systems Design, 2024 – designed, routed and assembled by Adrian Spycher.
+
+A small (2.5 × 3.5 cm) board that charges a Li-Ion / Li-Po battery (500 mA) and provides **5 V and 3.3 V** rails (≥ 500 mA each), from schematic to assembled PCB.
+
+<p align="center"><img src="report/image/photo_PCB.jpg" width="50%"></p>
+
+**Tech:** Altium Designer · PCB design · MCP73831 charger · buck & boost regulators · Typst (report)
 
 ## Statement
 
