@@ -1,2 +1,9 @@
 # - report -
 report/report.pdf
+
+# - Altium -
+History/
+__Previews/
+Project Logs for */
+*.WAS
+*.PcbDoc.htm
