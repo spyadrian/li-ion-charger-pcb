@@ -1,56 +1,63 @@
-# Development of a Li-Ion / Li-Po charger
+# Li-Ion / Li-Po Charger PCB
 
-hepia, Hardware Systems Design, 2024 – designed, routed and assembled by Adrian Spycher.
+A **2.5 × 3.5 cm** board that charges a single-cell Li-Ion / Li-Po battery from USB-C and provides regulated **5 V and 3.3 V** rails – designed in **Altium Designer**, from component selection to schematic, layout, assembly and measurements.
 
-A small (2.5 × 3.5 cm) board that charges a Li-Ion / Li-Po battery (500 mA) and provides **5 V and 3.3 V** rails (≥ 500 mA each), from schematic to assembled PCB.
+<p align="center">
+  <img src="docs/pcb-photo.jpg" width="40%" alt="Assembled board">
+  <img src="docs/pcb-3d.png" width="40%" alt="3D view of the PCB in Altium">
+</p>
 
-<p align="center"><img src="report/image/photo_PCB.jpg" width="50%"></p>
+> hepia (HES-SO Geneva) · Hardware Systems Design · 2024 · Solo project
+> 📄 [Report (French, 31 pages)](docs/report-fr.pdf)
 
-**Tech:** Altium Designer · PCB design · MCP73831 charger · buck & boost regulators · Typst (report)
+## Specifications
 
-## Statement
+| Requirement | Target |
+|---|---|
+| Board size | ≤ 2.5 × 3.5 cm |
+| Battery charge current | 500 mA |
+| 5 V and 3.3 V outputs | ≥ 500 mA each |
+| Components | SMD only, pitch ≥ 0.4 mm |
 
-1st learning phase with the realization of a simple module: a LiIon or LiPo battery charger and 5V and 3.3V power supply.
+## Design
 
-### Specifications
+<p align="center"><img src="report/image/schema_general.png" width="720" alt="Top-level schematic"></p>
 
-- Maximum size 2.5cmx3.5cm
-- Charging current = 500mA
-- 3.3V current >= 500mA
-- 5V current >= 500mA
-- SMD component with pitch >= 0.4mm
+USB-C power feeds four sub-circuits, each with its own schematic sheet:
 
-### Design step
+| Block | Part | Role |
+|---|---|---|
+| Charge management | Microchip **MCP73831** | linear Li-Ion / Li-Po charger, 4.2 V, charge current set to 500 mA by a 2 kΩ resistor, status LED |
+| Voltage detector | ROHM **BD53E30G** | enables the regulators only when the battery is above its minimum voltage |
+| Boost regulator | Renesas **ISL97519A** | battery → **5 V** |
+| Buck regulator | TI **LM22671-ADJ** | battery → **3.3 V** |
 
-- Drawing of components for “readable” schematics. End date 9/10/2024
-- Production of electronic schematics. End date 16/10/2024
-- Drawing of component footprints. End date 30/10/2024
-- Printed circuit layout. End date 13/11/2024
-- Preparation of files for external pcb manufacturing. End date 20/11/2024
-- While waiting for the PCB, check component order. BOM creation, start of report on choice of Project 2nd PCB.
-- Assemble pcb. End date 04/12/2024
-- Function test and corrections. End date 11/12/2024
+The 2-layer board was routed in Altium, manufactured, then assembled and tested by hand.
 
-### Report
+## Results
 
-- Introduction to the problem
-- Describe your architecture and choice of solution
-- Schematics
-- Layout of the pcb
-- Conclusion on results obtained, tests
-- Photo of assembled board
+Measured on the bench, with instruments simulating the battery and drawing current from the outputs (35 battery-voltage / load-current combinations, 3.0–4.2 V and 100–500 mA):
 
-## BOMs
+- **Outputs**: 5.03 V and 3.25 V on average (within 2 %), about 0.15 V peak-to-peak, holding up to 500 mA.
+- **Charging**: about 95 % of the input current goes to the battery; charging stops at 4.2 V.
+- **Lessons learned**: the wrong variant of the charger was ordered (`MCP73831-2DCI` instead of `-2ACI`), so the battery is not protected against deep discharge below 2.8 V; the boost converter passes its input through when disabled, so the 5 V rail does not drop to 0 V like the 3.3 V rail. Both are analysed in the report, with improvements for a next revision.
 
-- [Phoenix Contact - 1725656](https://www.mouser.ch/ProductDetail/Phoenix-Contact/1725656?qs=sGAEpiMZZMvlX3nhDDO4AO%252BB0WtzXoGPTRQyUfYRH6s%3D)
-- [Power Inductors SMD, 39uH - 7447789139](https://www.mouser.ch/ProductDetail/Wurth-Elektronik/7447789139?qs=E%2F%2FhvbtCqpNQ7KQArYriqw%3D%3D)
-- [Power Inductors SMD, 10uH - 78438335100](https://www.mouser.ch/ProductDetail/Wurth-Elektronik/78438335100?qs=sBf%2Fb4nBSleRD2yHXv4EpQ%3D%3D)
-- [Supervisory Circuits Voltage Detector - BD53E30G-MTR](https://www.mouser.ch/ProductDetail/ROHM-Semiconductor/BD53E30G-MTR?qs=WHeKGGBt0W8BsyUIHW4eRw%3D%3D)
-- [Switching Voltage Regulators Boost - ISL97519AIUZ](https://www.mouser.ch/ProductDetail/Renesas-Intersil/ISL97519AIUZ?qs=sGAEpiMZZMvAX9OfPh%252B2NdrUzpYIC9WFoHZg1f2cJ9g%3D)
-- [Switching Voltage Regulators Buck - LM22671MRX-ADJ/NOPB](https://www.mouser.ch/ProductDetail/Texas-Instruments/LM22671MRX-ADJ-NOPB?qs=X1J7HmVL2ZGHbJs9hwNu1Q%3D%3D)
-- [Schottky Diodes, 1A 15V - LSM115JE3/TR13](https://www.mouser.ch/ProductDetail/Microchip-Technology/LSM115JE3-TR13?qs=6jAvgNDGUA8H9k1qUsKdHA%3D%3D)
-- [Battery Management, 4.2V - MCP73831T-2DCI/OT](https://www.mouser.ch/ProductDetail/Microchip-Technology/MCP73831T-2DCI-OT?qs=yUQqVecv4qu38ml9qkvsJw%3D%3D)
-- [Single Colour LEDs, Green - SM0603PGC](https://www.mouser.ch/ProductDetail/Bivar/SM0603PGC?qs=jaLxTFIJCis8L0JCXp65MQ%3D%3D)
-- [Schottky Diodes, 2A 90V - SS29FA](https://www.mouser.ch/ProductDetail/onsemi-Fairchild/SS29FA?qs=R26iFe%2FkX%2FICExnaddSDew%3D%3D)
-- [USB Connectors - USB4125-GF-A-0190](https://www.mouser.ch/ProductDetail/GCT/USB4125-GF-A-0190?qs=QNEnbhJQKvbCz4hEJBS24w%3D%3D)
+## Repository structure
 
+```
+├── hardware/          Altium project: schematics (*.SchDoc), PCB (*.PcbDoc), libraries, BOM,
+│   │                  PDF exports of the schematics and layout
+│   └── Project Outputs…/   Gerber and drill files sent to the manufacturer
+├── report/            report sources (Typst), figures and the Python scripts that plot the measurements
+└── docs/              compiled report and images
+```
+
+Open `hardware/spycheradrian_csh_charger.PrjPcb` in Altium Designer, or browse the PDF exports (`hardware/*.pdf`) without it.
+
+## Tech
+
+Altium Designer · PCB design · power electronics (linear charger, buck and boost converters) · SMD assembly · lab measurements · Python / Matplotlib · Typst
+
+## License
+
+[MIT](LICENSE)
